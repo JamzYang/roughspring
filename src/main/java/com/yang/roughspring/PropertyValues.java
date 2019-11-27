@@ -9,7 +9,7 @@ import java.util.Set;
  */
 public class PropertyValues {
     //避免重复添加属性
-    private Set<PropertyValue> propertyValueSet = new HashSet<>();
+    private final Set<PropertyValue> propertyValueSet = new HashSet<>();
 
     public Set<PropertyValue> getPropertyValueSet() {
         return propertyValueSet;
