@@ -1,6 +1,7 @@
 package com.yang.roughspring.factory;
 
 import com.yang.roughspring.BeanDefinition;
+import com.yang.roughspring.BeanReference;
 import com.yang.roughspring.PropertyValue;
 import com.yang.roughspring.PropertyValues;
 
@@ -22,21 +23,25 @@ public class AutowireCapableBeanFactory extends AbstractBeanFactory {
             return bean;
         } catch (InstantiationException | IllegalAccessException e) {
             e.printStackTrace();
+        } catch (Exception e) {
+            e.printStackTrace();
         }
         return null;
     }
 
-    private void applyPropertyValues(Object bean, BeanDefinition beanDefinition){
+    private void applyPropertyValues(Object bean, BeanDefinition beanDefinition) throws Exception {
         Set<PropertyValue> propertyValueSet = beanDefinition.getPropertyValues().getPropertyValueSet();
         for (PropertyValue propertyValue : propertyValueSet) {
             String name = propertyValue.getName();
-            try {
-                Field field = bean.getClass().getDeclaredField(name);
-                field.setAccessible(true);
-                field.set(bean,propertyValue.getValue());
-            } catch (NoSuchFieldException | IllegalAccessException e) {
-                e.printStackTrace();
+            Field field = bean.getClass().getDeclaredField(name);
+            field.setAccessible(true);
+            Object value = propertyValue.getValue();
+            if(value instanceof BeanReference){
+                BeanReference ref = (BeanReference) value;
+                String beanName = ref.getBeanName();
+                value = getBean(beanName);
             }
+            field.set(bean,value);
         }
     }
 }
