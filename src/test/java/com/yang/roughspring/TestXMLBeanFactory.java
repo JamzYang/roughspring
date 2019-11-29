@@ -30,6 +30,6 @@ public class TestXMLBeanFactory {
         }
         Coder coder = (Coder)beanFactory.getBean("coder");
         Assert.assertEquals("yang",coder.getName());
-        Assert.assertEquals("Hello, RoughSpring",coder.getBook().getName());
+        Assert.assertEquals("Hello, Roughspring",coder.getBook().getName());
     }
 }

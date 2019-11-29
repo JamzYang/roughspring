@@ -14,7 +14,7 @@ public class TestAutowireCapableBeanFactory {
     @Test
     public void testAutowire(){
         PropertyValue nameProperty = new PropertyValue("name", "yang");
-        PropertyValue bookProperty = new PropertyValue("book", new Book("Hello, RoughSpring",100.00));
+        PropertyValue bookProperty = new PropertyValue("book", new Book("Hello, RoughSpring","100.00"));
         PropertyValues propertyValues = new PropertyValues();
         propertyValues.addPropertyValue(nameProperty);
         propertyValues.addPropertyValue(bookProperty);

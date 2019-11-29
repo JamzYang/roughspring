@@ -7,7 +7,7 @@ public class TestBeanDefinition {
 
     @Test
     public void testGetBean(){
-        Book book = new Book("Hello, RoughSpring",100.00);
+        Book book = new Book("Hello, RoughSpring","100.00");
         BeanDefinition beanDefinition = new BeanDefinition(book);
         Book bean = (Book)beanDefinition.getBean();
         Assert.assertNotNull(bean);
