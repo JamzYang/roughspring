@@ -1,5 +1,6 @@
 package com.yang.roughspring;
 
+import com.yang.roughspring.factory.AbstractBeanFactory;
 import com.yang.roughspring.factory.AutowireCapableBeanFactory;
 import com.yang.roughspring.factory.BeanFactory;
 import com.yang.roughspring.io.Resource;
@@ -31,5 +32,22 @@ public class TestXMLBeanFactory {
         Coder coder = (Coder)beanFactory.getBean("coder");
         Assert.assertEquals("yang",coder.getName());
         Assert.assertEquals("Hello, Roughspring",coder.getBook().getName());
+    }
+
+    @Test
+    public void testLazy() throws Exception {
+        // 1.读取配置
+        XmlBeanDefinitionReader xmlBeanDefinitionReader = new XmlBeanDefinitionReader(new ResourceLoader());
+        xmlBeanDefinitionReader.loadBeanDefinitions("tinyioc.xml");
+
+        // 2.初始化BeanFactory并注册bean
+        AbstractBeanFactory beanFactory = new AutowireCapableBeanFactory();
+        for (Map.Entry<String, BeanDefinition> beanDefinitionEntry : xmlBeanDefinitionReader.getRegistry().entrySet()) {
+            beanFactory.registerBeanDefinition(beanDefinitionEntry.getKey(), beanDefinitionEntry.getValue());
+        }
+
+        // 3.获取bean
+        HelloWorldService helloWorldService = (HelloWorldService) beanFactory.getBean("helloWorldService");
+        helloWorldService.helloWorld();
     }
 }

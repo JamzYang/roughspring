@@ -19,6 +19,7 @@ public class AutowireCapableBeanFactory extends AbstractBeanFactory {
     protected Object doCreateBean(BeanDefinition beanDefinition) {
         try {
             Object bean = beanDefinition.getBeanClass().newInstance();
+            beanDefinition.setBean(bean);
             applyPropertyValues(bean,beanDefinition);
             return bean;
         } catch (InstantiationException | IllegalAccessException e) {

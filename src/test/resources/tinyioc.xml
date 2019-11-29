@@ -8,12 +8,20 @@
 	http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-2.5.xsd
 	http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-2.5.xsd">
 
-    <bean name="coder" class="com.yang.roughspring.Coder">
+    <!--<bean name="coder" class="com.yang.roughspring.Coder">
         <property name="name" value="yang"></property>
         <property name="book" ref="book"></property>
     </bean>
     <bean name="book" class="com.yang.roughspring.Book">
         <property name="name" value="Hello, Roughspring"></property>
         <property name="price" value="100.00"></property>
+    </bean>-->
+    <bean name="outputService" class="com.yang.roughspring.OutputService">
+        <property name="helloWorldService" ref="helloWorldService"></property>
+    </bean>
+
+    <bean name="helloWorldService" class="com.yang.roughspring.HelloWorldService">
+        <property name="text" value="Hello World!"></property>
+        <property name="outputService" ref="outputService"></property>
     </bean>
 </beans>
