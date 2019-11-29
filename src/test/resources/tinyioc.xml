@@ -10,6 +10,10 @@
 
     <bean name="coder" class="com.yang.roughspring.Coder">
         <property name="name" value="yang"></property>
+        <property name="book" ref="book"></property>
     </bean>
-
+    <bean name="book" class="com.yang.roughspring.Book">
+        <property name="name" value="Hello, Roughspring"></property>
+        <property name="price" value="100.00"></property>
+    </bean>
 </beans>

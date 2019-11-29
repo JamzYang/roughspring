@@ -19,9 +19,9 @@ public abstract class AbstractBeanFactory implements BeanFactory {
 
     @Override
     public void registerBeanDefinition(String name, BeanDefinition beanDefinition) {
+        beanDefinitionMap.put(name, beanDefinition);
         Object bean = doCreateBean(beanDefinition);
         beanDefinition.setBean(bean);
-        beanDefinitionMap.put(name, beanDefinition);
     }
 
     protected abstract Object doCreateBean(BeanDefinition beanDefinition);

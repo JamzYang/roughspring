@@ -11,6 +11,10 @@ public class BeanReference {
     public BeanReference() {
     }
 
+    public BeanReference(String beanName) {
+        this.beanName = beanName;
+    }
+
     public BeanReference(String beanName, Object object) {
         this.beanName = beanName;
         this.object = object;
